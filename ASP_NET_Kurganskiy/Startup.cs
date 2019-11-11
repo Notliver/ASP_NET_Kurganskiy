@@ -36,6 +36,7 @@ namespace ASP_NET_Kurganskiy
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
