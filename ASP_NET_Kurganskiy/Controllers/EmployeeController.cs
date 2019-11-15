@@ -16,7 +16,7 @@ namespace ASP_NET_Kurganskiy.Controllers
             new EmployeeView{Id = 3, FirstName = "Олег", SurName = "Олегов", Patronymic = "Олегович", Age = 19}
         };
 
-        public IActionResult GetEmployes()
+        public IActionResult Index()
         {
             return View(_Employees);
         }
