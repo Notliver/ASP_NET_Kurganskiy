@@ -25,6 +25,7 @@ namespace ASP_NET_Kurganskiy
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
 
             app.UseStaticFiles(/*new StaticFileOptions { ServeUnknownFileTypes = true }*/);
