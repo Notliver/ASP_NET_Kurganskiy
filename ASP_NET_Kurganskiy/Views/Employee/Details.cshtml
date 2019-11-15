@@ -1,36 +1,32 @@
 ﻿@model ASP_NET_Kurganskiy.ViewModels.EmployeeView
 
-<!DOCTYPE html>
+@{ 
+    ViewData["Title"] = "Сведения о сотруднике id:" + Model.Id;
+}
+<h3>@ViewData["Title"]</h3>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-        <div class="container">
-        <h2>Сведенья о работнике #@Model.Id</h2>
-        <table>
+
+
+        <table class="table">
             <tbody>
             <tr>
-                <th>Фамилия</th>
+                <th>@Html.LabelFor(m=>m.SurName)</th>
                 <td>@Model.SurName</td>
             </tr>
             <tr>
-                <th>Имя</th>
+                <th>@Html.LabelFor(m=>m.FirstName)</th>
                 <td>@Model.FirstName</td>
             </tr>
             <tr>
-                <th>Отчество</th>
+                <th>@Html.LabelFor(m=>m.Patronymic)</th>
                 <td>@Model.Patronymic</td>
             </tr>
             <tr>
-                <th>Возраст</th>
+                <th>@Html.LabelFor(m=>m.Age)</th>
                 <td>@Model.Age</td>
             </tr>
             </tbody>
         </table>
-        @Html.ActionLink("К списку сотрудников", "GetEmployes")
-    </div>
-</body>
-</html>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a>
+
+

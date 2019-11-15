@@ -23,10 +23,22 @@ namespace ASP_NET_Kurganskiy.Controllers
 
         public IActionResult Details(int? id)
         {
-            if (id is null) return NotFound();
+            if (id is null) return BadRequest();
             var employee = _Employees.FirstOrDefault(e => e.Id == id);
             if (employee is null) return NotFound();
             return View(employee);
+        }
+
+        public IActionResult Edit(EmployeeView EmployeInfo)
+        {
+            if (!ModelState.IsValid) return View(EmployeInfo);
+            var employee = _Employees.FirstOrDefault(e => e.Id == EmployeInfo.Id);
+            if (employee is null) return NotFound();
+            employee.FirstName = EmployeInfo.FirstName;
+            employee.SurName = EmployeInfo.SurName;
+            employee.Patronymic = EmployeInfo.Patronymic;
+            employee.Age = EmployeInfo.Age;
+            return RedirectToAction(nameof(Details), new { id = EmployeInfo.Id });
         }
     }
 }

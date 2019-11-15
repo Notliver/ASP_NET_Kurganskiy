@@ -25,8 +25,9 @@
             @foreach (var employee in Model)
             {
                 <tr>
-                    <td>@employee.Id</td>
-                    <td>@employee.SurName</td>
+                     
+                    <td><a asp-action="Details" asp-route-Id="@employee.Id">
+                        @employee.SurName</a></td>
                     <td>@employee.FirstName</td>
                     <td>@employee.Patronymic</td>
                     <td>@employee.Age</td>

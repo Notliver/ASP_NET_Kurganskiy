@@ -1,0 +1,18 @@
+﻿@model ASP_NET_Kurganskiy.ViewModels.EmployeeView
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <section>
+        <div class="container">
+            @using (Html.BeginForm())
+            {
+                @Html.EditorForModel()
+                <div class="form-group">
+                    <input type="submit" value="Сохранить"/>
+                </div>
+            }
+            <a asp-action="Index">Вернуться</a>
+        </div>
+    </section>
