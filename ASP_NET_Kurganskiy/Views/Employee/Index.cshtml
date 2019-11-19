@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<ASP_NET_Kurganskiy.ViewModels.EmployeeView>
 
 @{ 
     ViewBag.Title = "Сотрудники";
@@ -25,16 +25,25 @@
             @foreach (var employee in Model)
             {
                 <tr>
-                     
-                    <td><a asp-action="Details" asp-route-Id="@employee.Id">
-                        @employee.SurName</a></td>
-                    <td>@employee.FirstName</td>
+                    <td>@employee.Id</td>
+                    <td>
+                        <a asp-action="Details" asp-route-Id="@employee.Id">
+                            @employee.SurName
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="DetailsName"
+                           asp-route-FirstName="@employee.FirstName"
+                           asp-route-LastName="@employee.SurName">
+                            @employee.FirstName
+                        </a>
+                    </td>
                     <td>@employee.Patronymic</td>
                     <td>@employee.Age</td>
                     <td>
-                        @Html.ActionLink("Детали сотрудника", "Details", new { id = employee.Id })
+                        <a asp-action="Edit" asp-route-Id="@employee.Id"><i class="fa fa-user-edit"></i></a>
+                        <a asp-action="Delete" asp-route-Id="@employee.Id"><i class="fa fa-trash text-danger"></i></a>
                     </td>
-
                 </tr>
             }
         </tbody>
