@@ -18,7 +18,7 @@ namespace ASP_NET_Kurganskiy.Controllers
         
         public IActionResult Index()
         {
-            return View(_EmployeesData);
+            return View(_EmployeesData.GetAll());
         }
 
         //[Route("Id")]
