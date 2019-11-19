@@ -18,6 +18,7 @@ namespace ASP_NET_Kurganskiy.Controllers
         
         public IActionResult Index()
         {
+
             return View(_EmployeesData.GetAll());
         }
 
@@ -47,6 +48,20 @@ namespace ASP_NET_Kurganskiy.Controllers
 
         }
 
+        public IActionResult Create() => View(new EmployeeView());
+
+        [HttpPost]
+        public IActionResult Create(EmployeeView NewEmployee)
+        {
+            if (!ModelState.IsValid)
+                return View(NewEmployee);
+
+            _EmployeesData.Add(NewEmployee);
+            _EmployeesData.SaveChanges();
+
+            return RedirectToAction("Details", new { NewEmployee.Id });
+        }
+
         public IActionResult Edit(int? Id)
         {
             if (Id is null) return View(new EmployeeView());
@@ -58,6 +73,7 @@ namespace ASP_NET_Kurganskiy.Controllers
             return View(employee);
         }
 
+        [HttpPost]
         public IActionResult Edit(EmployeeView Employee)
         {
             if (Employee is null)

@@ -50,7 +50,6 @@ namespace ASP_NET_Kurganskiy.Infrastructure.Services
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
         }
     }
 }
