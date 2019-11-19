@@ -51,10 +51,10 @@ namespace ASP_NET_Kurganskiy.Controllers
 
             //return new FileStreamResult(new MemoryStream(Encoding.UTF8.GetBytes("Hello World!")), "application/");
 
-            return StatusCode(405);
-            return new StatusCodeResult(500);
-            return NoContent();
-            return new NoContentResult();
+            //return StatusCode(405);
+            //return new StatusCodeResult(500);
+            //return NoContent();
+            //return new NoContentResult();
         }
 
 
