@@ -38,6 +38,8 @@ namespace ASP_NET_Kurganskiy
             app.UseStaticFiles(/*new StaticFileOptions { ServeUnknownFileTypes = true }*/);
             app.UseDefaultFiles();
 
+            //app.UseWelcomePage("/welcome");   //Пример промежуточного ПО
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
