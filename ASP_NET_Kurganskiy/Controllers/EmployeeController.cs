@@ -47,16 +47,48 @@ namespace ASP_NET_Kurganskiy.Controllers
 
         }
 
-        //public IActionResult Edit(EmployeeView EmployeInfo)
-        //{
-        //    if (!ModelState.IsValid) return View(EmployeInfo);
-        //    var employee = _Employees.FirstOrDefault(e => e.Id == EmployeInfo.Id);
-        //    if (employee is null) return NotFound();
-        //    employee.FirstName = EmployeInfo.FirstName;
-        //    employee.SurName = EmployeInfo.SurName;
-        //    employee.Patronymic = EmployeInfo.Patronymic;
-        //    employee.Age = EmployeInfo.Age;
-        //    return RedirectToAction(nameof(Details), new { id = EmployeInfo.Id });
-        //}
+        public IActionResult Edit(int? Id)
+        {
+            if (Id is null) return View(new EmployeeView());
+
+            if (id < 0) return BadRequest();
+            var employee = _EmployeesData.GetById((int)Id);
+            if (employee is null)
+                return NotFound();
+            return View(employee);
+        }
+
+        public IActionResult Edit(EmployeeView Employee)
+        {
+            if (Employee is null)
+                throw new ArgumentOutOfRangeException(nameof(Employee));
+
+            if (!ModelState.IsValid)
+                View(Employee);
+
+            var id = Employee.Id;
+            if (id == 0)
+                _EmployeesData.Add(Employee);
+            else
+                _EmployeesData.Edit(id, Employee);
+
+            _EmployeesData.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult Delete(int Id)
+        {
+            var employee = _EmployeesData.GetById(Id);
+            if (employee is null)
+                return NotFound();
+            return View(employee);
+        }
+
+
+        public IActionResult DeleteConfirmed(int Id)
+        {
+            _EmployeesData.Delete(Id);
+            return RedirectToAction("Index");
+        }
     }
 }
