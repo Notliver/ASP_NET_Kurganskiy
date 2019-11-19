@@ -7,7 +7,9 @@ using ASP_NET_Kurganskiy.ViewModels;
 
 namespace ASP_NET_Kurganskiy.Controllers
 {
+    //[Route("Users")]
     public class EmployeeController : Controller
+        
     {
         private static readonly List<EmployeeView> _Employees = new List<EmployeeView>
         {
@@ -16,11 +18,13 @@ namespace ASP_NET_Kurganskiy.Controllers
             new EmployeeView{Id = 3, FirstName = "Олег", SurName = "Олегов", Patronymic = "Олегович", Age = 19}
         };
 
+        
         public IActionResult Index()
         {
             return View(_Employees);
         }
 
+        //[Route("Id")]
         public IActionResult Details(int? id)
         {
             if (id is null) return BadRequest();

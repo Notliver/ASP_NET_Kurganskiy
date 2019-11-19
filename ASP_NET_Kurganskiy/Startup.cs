@@ -51,7 +51,7 @@ namespace ASP_NET_Kurganskiy
 
             //app.Run(async context => await context.Response.WriteAsync("Hello World!")); //Безусловное выполнение ( замыкает конвейер) 
 
-            app.Map("/Hello", application => app.Run(async context => await context.Response.WriteAsync("Hello World!"))); 
+            //app.Map("/Hello", application => app.Run(async context => await context.Response.WriteAsync("Hello World!")));
 
             app.UseMvc(routes =>
             {
