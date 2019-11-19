@@ -51,7 +51,7 @@ namespace ASP_NET_Kurganskiy.Controllers
         {
             if (Id is null) return View(new EmployeeView());
 
-            if (id < 0) return BadRequest();
+            if (Id < 0) return BadRequest();
             var employee = _EmployeesData.GetById((int)Id);
             if (employee is null)
                 return NotFound();
