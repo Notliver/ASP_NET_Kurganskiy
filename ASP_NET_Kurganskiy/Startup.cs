@@ -32,13 +32,26 @@ namespace ASP_NET_Kurganskiy
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                app.UseBrowserLink(); 
             }
 
             app.UseStaticFiles(/*new StaticFileOptions { ServeUnknownFileTypes = true }*/);
             app.UseDefaultFiles();
+            app.UseCookiePolicy();
+
+
+            //app.UseAuthentication();
+            //app.UseSession();
+            //app.UseResponseCaching();
+            //app.UseResponseCompression();
+
+
 
             //app.UseWelcomePage("/welcome");   //Пример промежуточного ПО
+
+            //app.Run(async context => await context.Response.WriteAsync("Hello World!")); //Безусловное выполнение ( замыкает конвейер) 
+
+            app.Map("/Hello", application => app.Run(async context => await context.Response.WriteAsync("Hello World!"))); 
 
             app.UseMvc(routes =>
             {
