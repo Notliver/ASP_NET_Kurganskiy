@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using ASP_NET_Kurganskiy.Infrastructure.Conventions;
+using ASP_NET_Kurganskiy.Infrastructure.Services;
+using ASP_NET_Kurganskiy.Infrastructure.Interfaces;
 
 namespace ASP_NET_Kurganskiy
 {
@@ -20,6 +22,9 @@ namespace ASP_NET_Kurganskiy
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+
+
             services.AddMvc(
                 opt =>
                 {
@@ -51,7 +56,7 @@ namespace ASP_NET_Kurganskiy
 
             //app.Run(async context => await context.Response.WriteAsync("Hello World!")); //Безусловное выполнение ( замыкает конвейер) 
 
-            //app.Map("/Hello", application => app.Run(async context => await context.Response.WriteAsync("Hello World!")));
+            //app.Map("/Hello", application => application.Run(async context => await context.Response.WriteAsync("Hello World!")));
 
             app.UseMvc(routes =>
             {
