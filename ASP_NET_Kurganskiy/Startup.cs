@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using ASP_NET_Kurganskiy.Infrastructure.Conventions;
+using ASP_NET_Kurganskiy.Infrastructure.Services;
+using ASP_NET_Kurganskiy.Infrastructure.Interfaces;
 
 namespace ASP_NET_Kurganskiy
 {
@@ -17,19 +20,43 @@ namespace ASP_NET_Kurganskiy
         public Startup(IConfiguration Config) => Configuration = Config;
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services) => services.AddMvc();
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
+
+            services.AddMvc(
+                opt =>
+                {
+                    //opt.Conventions.Add(new CustomControllerConvention());
+                });
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                app.UseBrowserLink(); 
             }
 
             app.UseStaticFiles(/*new StaticFileOptions { ServeUnknownFileTypes = true }*/);
             app.UseDefaultFiles();
+            app.UseCookiePolicy();
+
+
+            //app.UseAuthentication();
+            //app.UseSession();
+            //app.UseResponseCaching();
+            //app.UseResponseCompression();
+
+
+
+            //app.UseWelcomePage("/welcome");   //Пример промежуточного ПО
+
+            //app.Run(async context => await context.Response.WriteAsync("Hello World!")); //Безусловное выполнение ( замыкает конвейер) 
+
+            //app.Map("/Hello", application => application.Run(async context => await context.Response.WriteAsync("Hello World!")));
 
             app.UseMvc(routes =>
             {
