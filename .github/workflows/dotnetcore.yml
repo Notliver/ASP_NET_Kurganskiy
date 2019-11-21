@@ -15,3 +15,7 @@ jobs:
         dotnet-version: 2.2.108
     - name: Build with dotnet
       run: dotnet build --configuration Release
+      -uses: action/upload-artifact@master
+       with:
+       key: release 
+       path: ASP_NET_Kurganskiy/bin/Release/netcoreapp2.2
