@@ -1,12 +1,17 @@
 ﻿<!DOCTYPE html>
 
+@{ 
+    ViewBag.Title = "Сотрудники";
+}
+<h3>@ViewBag.Title</h3>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
 <body>
-    <table>
+    <table class=table>
         <thead>
             <tr>
                 <td>id</td>
@@ -20,8 +25,9 @@
             @foreach (var employee in Model)
             {
                 <tr>
-                    <td>@employee.Id</td>
-                    <td>@employee.SurName</td>
+                     
+                    <td><a asp-action="Details" asp-route-Id="@employee.Id">
+                        @employee.SurName</a></td>
                     <td>@employee.FirstName</td>
                     <td>@employee.Patronymic</td>
                     <td>@employee.Age</td>

@@ -10,10 +10,20 @@ namespace ASP_NET_Kurganskiy.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration _Configuration;
-        public HomeController(IConfiguration configuration) => _Configuration = configuration;
+        public HomeController() { }
+
         public IActionResult Index() => View();
-        public IActionResult GetConfig() => Content(_Configuration["CustomData"]);
+        public IActionResult Blog() => View();
+        public IActionResult BlogSingle() => View();
+        public IActionResult Cart() => View();
+        public IActionResult CheckOut() => View();
+        public IActionResult ContactUs() => View();
+        public IActionResult Login() => View();
+        public IActionResult ProductDetails() => View();
+        public IActionResult Shop() => View();
+        public IActionResult Error404() => View();
+
+
 
 
     }
