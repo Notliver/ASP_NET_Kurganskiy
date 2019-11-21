@@ -17,7 +17,7 @@ jobs:
       run: dotnet build --configuration Release
     - uses: actions/upload-artifact@master
       with:
-        key:  release 
+        name:  release 
         path: ASP_NET_Kurganskiy/bin/Release/netcoreapp2.2 
 
 
