@@ -19,4 +19,8 @@
     <Folder Include="wwwroot\imgs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ASP_NET_Kurganskiy.Domain\ASP_NET_Kurganskiy.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

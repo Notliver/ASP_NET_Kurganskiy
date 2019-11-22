@@ -7,6 +7,6 @@ namespace ASP_NET_Kurganskiy.Domain.Entities
     {
         public int Order { get; set; }
 
-        public int? OarentId { get; set; }
+        public int? ParentId { get; set; }
     }
 }
