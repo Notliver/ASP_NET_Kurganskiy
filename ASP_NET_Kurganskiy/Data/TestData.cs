@@ -20,7 +20,7 @@ namespace ASP_NET_Kurganskiy.Data
 
         };
 
-        public static IEnumerable<Section> Section { get; } = new[]
+        public static IEnumerable<Section> Sections { get; } = new[]
         {
               new Section {Id = 1, Name = "Sportswear", Order = 0},
               new Section {Id = 2, Name = "Nike", Order = 0, ParentId = 1},
