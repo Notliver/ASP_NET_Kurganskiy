@@ -2,7 +2,7 @@
 
 namespace ASP_NET_Kurganskiy.Domain.Entities.Base
 {
-    public abstract class NameEntity : BaseEntity, INamedEntity
+    public abstract class NamedEntity : BaseEntity, INamedEntity
     {
         public string Name { get; set; }
     }
