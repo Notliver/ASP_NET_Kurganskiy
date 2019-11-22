@@ -24,6 +24,10 @@ namespace ASP_NET_Kurganskiy
         {
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
+            //services.AddSingleton<TInterface, TImplementation>(); //- Единый объект на все время жизни приложения с момента первого обращения к нему
+            //services.AddTransient<>(); // - Один объек на каждый запрос экземпляра сервиса
+            //services.AddScoped<>(); // - Один оъект на время одного входящего запроса(на время действия области)
+            services.AddSession();
 
             services.AddMvc(
                 opt =>

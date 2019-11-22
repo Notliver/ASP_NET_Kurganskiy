@@ -79,8 +79,21 @@ namespace ASP_NET_Kurganskiy.Controllers
             if (Employee is null)
                 throw new ArgumentOutOfRangeException(nameof(Employee));
 
+           if(Employee.Age < 18)
+            {
+                ModelState.AddModelError(nameof(EmployeeView.Age), "Ограничение возрастной группы 18+");
+
+            }
+
+           if(Employee.FirstName == "123" && Employee.SurName == "qwe")
+            {
+                ModelState.AddModelError("", "Подозрительно");
+            }
+            
             if (!ModelState.IsValid)
-                View(Employee);
+                return View(Employee);
+
+ 
 
             var id = Employee.Id;
             if (id == 0)
