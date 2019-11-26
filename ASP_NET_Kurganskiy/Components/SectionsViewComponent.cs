@@ -19,7 +19,7 @@ namespace ASP_NET_Kurganskiy.Components
     
         private IEnumerable<SectionViewModel> GetSections()
         {
-            var sections = _ProductData.GetSection();
+            var sections = _ProductData.GetSections();
 
             var parent_sections = sections.Where(section => section.ParentId is null).ToArray();
 
