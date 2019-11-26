@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using ASP_NET_Kurganskiy.Infrastructure.Conventions;
 using ASP_NET_Kurganskiy.Infrastructure.Services;
 using ASP_NET_Kurganskiy.Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using ASP_NET.DAL.Context;
 
 namespace ASP_NET_Kurganskiy
 {
@@ -22,6 +25,9 @@ namespace ASP_NET_Kurganskiy
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ASP_NET_Context>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, InMemoryProductData>();
 

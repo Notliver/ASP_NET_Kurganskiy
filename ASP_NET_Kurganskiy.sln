@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASP_NET_Kurganskiy", "ASP_NET_Kurganskiy\ASP_NET_Kurganskiy.csproj", "{4CE1331D-3A90-474F-BB61-56F24DC2AD7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_NET_Kurganskiy.Domain", "ASP_NET_Kurganskiy.Domain\ASP_NET_Kurganskiy.Domain.csproj", "{0988A74E-55E7-443C-A732-2D2632593D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASP_NET_Kurganskiy.Domain", "ASP_NET_Kurganskiy.Domain\ASP_NET_Kurganskiy.Domain.csproj", "{0988A74E-55E7-443C-A732-2D2632593D89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_NET.DAL", "ASP_NET.DAL\ASP_NET.DAL.csproj", "{C3780B64-919B-406F-92F1-DFA76188CD93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0988A74E-55E7-443C-A732-2D2632593D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0988A74E-55E7-443C-A732-2D2632593D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0988A74E-55E7-443C-A732-2D2632593D89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3780B64-919B-406F-92F1-DFA76188CD93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3780B64-919B-406F-92F1-DFA76188CD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3780B64-919B-406F-92F1-DFA76188CD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3780B64-919B-406F-92F1-DFA76188CD93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
