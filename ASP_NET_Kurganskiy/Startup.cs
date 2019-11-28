@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using ASP_NET_Kurganskiy.Infrastructure.Conventions;
 using ASP_NET_Kurganskiy.Infrastructure.Services;
 using ASP_NET_Kurganskiy.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ASP_NET.DAL.Context;
 using ASP_NET_Kurganskiy.Data;
 using Microsoft.AspNetCore.Identity;
