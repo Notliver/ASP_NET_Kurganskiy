@@ -20,7 +20,30 @@ namespace ASP_NET_Kurganskiy.Controllers
             _SignInManager = SignInManager;
         }
 
-        public IActionResult Login() => View();
+        public IActionResult Login(string ReturnUrl) => View(new LoginViewModel { ReturnUrl = ReturnUrl });
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel Model)
+        {
+            if(ModelState.IsValid)
+                return View(Model);
+
+            var login_result = await _SignInManager.PasswordSignInAsync(
+                Model.UserName,
+                Model.Password,
+                Model.RememberMe,
+                false);
+
+            if(login_result.Succeeded)
+            {
+                if (Url.IsLocalUrl(Model.ReturnUrl))
+                    return Redirect(Model.ReturnUrl);
+                return RedirectToAction("index", "Home");
+            }
+
+            ModelState.AddModelError("", "Неверное имя пользователя или пароль");
+            return View(Model);
+        }
 
         public IActionResult Register() => View(new RegisterUserViewModel());
 
@@ -46,6 +69,12 @@ namespace ASP_NET_Kurganskiy.Controllers
                 ModelState.AddModelError("", error.Description);
 
             return View(Model);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOut()
+        {
+            await _SignInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
