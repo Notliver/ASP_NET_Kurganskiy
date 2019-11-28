@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using ASP_NET_Kurganskiy.ViewModels;
 using ASP_NET_Kurganskiy.Infrastructure.Services;
 using ASP_NET_Kurganskiy.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASP_NET_Kurganskiy.Controllers
 {
     //[Route("Users")]
+    [Authorize]
     public class EmployeeController : Controller
         
     {
