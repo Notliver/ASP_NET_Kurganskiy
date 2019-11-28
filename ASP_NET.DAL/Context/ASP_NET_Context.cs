@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using ASP_NET_Kurganskiy.Domain.Entities;
+using ASP_NET_Kurganskiy.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASP_NET.DAL.Context
 {
-    public class ASP_NET_Context : DbContext
+    public class ASP_NET_Context : IdentityDbContext<User, Role, string>
     {
         public DbSet<Brand> Brands { get; set; }
 
