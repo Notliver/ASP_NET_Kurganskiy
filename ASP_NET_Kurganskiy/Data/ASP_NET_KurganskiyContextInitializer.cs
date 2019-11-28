@@ -27,7 +27,7 @@ namespace ASP_NET_Kurganskiy.Data
 
             if (await _db.Products.AnyAsync()) return;
 
-            using (var transaction = _db.Database.BeginTransaction())
+            using (var transaction = await db.BeginTransactionAsync())
             {
                 await _db.Sections.AddRangeAsync(TestData.Sections);
 

@@ -18,6 +18,7 @@ namespace ASP_NET.DAL.Migrations
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
+
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
