@@ -23,6 +23,6 @@ namespace ASP_NET_Kurganskiy.Infrastructure.Services
             return query;
         }
 
-        public IEnumerable<Section> GetSection() => TestData.Sections;
+        public IEnumerable<Section> GetSections() => TestData.Sections;
     }
 }

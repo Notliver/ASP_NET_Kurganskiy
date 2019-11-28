@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using ASP_NET_Kurganskiy.Infrastructure.Conventions;
 using ASP_NET_Kurganskiy.Infrastructure.Services;
 using ASP_NET_Kurganskiy.Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using ASP_NET.DAL.Context;
+using ASP_NET_Kurganskiy.Data;
 
 namespace ASP_NET_Kurganskiy
 {
@@ -22,8 +26,14 @@ namespace ASP_NET_Kurganskiy
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ASP_NET_Context>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<ASP_NET_KurganskiyContextInitializer>();
+
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddScoped<IProductData, InMemoryProductData>();
+            //services.AddScoped<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
 
             //services.AddSingleton<TInterface, TImplementation>(); //- Единый объект на все время жизни приложения с момента первого обращения к нему
             //services.AddTransient<>(); // - Один объек на каждый запрос экземпляра сервиса
@@ -37,8 +47,9 @@ namespace ASP_NET_Kurganskiy
                 });
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ASP_NET_KurganskiyContextInitializer db)
         {
+            db.InitializeAsync().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
