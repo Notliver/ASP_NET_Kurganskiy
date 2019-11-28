@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ASP_NET.DAL.Context;
 using ASP_NET_Kurganskiy.Data;
+using Microsoft.AspNetCore.Identity;
+using ASP_NET_Kurganskiy.Domain.Entities.Identity;
 
 namespace ASP_NET_Kurganskiy
 {
@@ -34,6 +36,46 @@ namespace ASP_NET_Kurganskiy
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             //services.AddScoped<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
+
+
+            //Подключаем авторизацию по Юзеру и Роли
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<ASP_NET_Context>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequiredLength = 3;//Длина пароля
+                opt.Password.RequireDigit = false;//Требование цифр
+                opt.Password.RequireUppercase = false;//Требование верхнего регистра
+                opt.Password.RequireLowercase = false;//Требование нижнего
+                opt.Password.RequireNonAlphanumeric = false;//Требование не алфавитного символа
+                opt.Password.RequiredUniqueChars = 3;//Должно быть кол-во уникальных символов
+
+                opt.Lockout.AllowedForNewUsers = true;//блокирует доступ новых пользователей, пока администратор их не разблокирует. Создавать можно.
+                opt.Lockout.MaxFailedAccessAttempts = 10;// Максимальное кол-во попыток входа
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);//Кулдаун при израсходовании кол-ва попыток
+
+                //opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; //Список допустимых символов для создания пользователя
+                opt.User.RequireUniqueEmail = false; /*Требование к уникальности e-mail 
+                                                       При отладке необходимо отключить, т.к. при содании пользователя мы не будем указывать почту 
+                                                       и как следствие второго пользователя не сможем уже создать*/
+            });
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.Name = "Kurganskiy-Identity";//Определяем под каким именем будем сохранять кукиз
+                opt.Cookie.HttpOnly = true; //Указываем что передача кукиз возможна только по HTTP
+                opt.Cookie.Expiration = TimeSpan.FromDays(150); //Время жизни кукиз
+
+                opt.LoginPath = "/Account/Login";
+                opt.LogoutPath = "/Accont/Logout";
+                opt.AccessDeniedPath = "Account/AccessDenided";
+
+                opt.SlidingExpiration = true;//Авторизуется, отслеживание
+
+                
+            });
 
             //services.AddSingleton<TInterface, TImplementation>(); //- Единый объект на все время жизни приложения с момента первого обращения к нему
             //services.AddTransient<>(); // - Один объек на каждый запрос экземпляра сервиса
@@ -60,9 +102,10 @@ namespace ASP_NET_Kurganskiy
             app.UseDefaultFiles();
             app.UseCookiePolicy();
 
+            app.UseAuthentication(); //Подключили Identity все что выше не требует авторизации, все что ниже требует
 
             //app.UseAuthentication();
-            //app.UseSession();
+            app.UseSession();
             //app.UseResponseCaching();
             //app.UseResponseCompression();
 
