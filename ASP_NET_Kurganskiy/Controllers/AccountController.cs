@@ -23,6 +23,14 @@ namespace ASP_NET_Kurganskiy.Controllers
             _Logger = Logger;
         }
 
+        public async Task<IActionResult> IsNameFree(string UserName)
+        {
+            var user = await _UserManager.FindByNameAsync(UserName);
+            if (user != null)
+                return Json("Такой пользователь уже существует");
+            return Json("true");
+        }
+
         public IActionResult Login(string ReturnUrl) => View(new LoginViewModel { ReturnUrl = ReturnUrl });
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -91,5 +99,7 @@ namespace ASP_NET_Kurganskiy.Controllers
             _Logger.LogInformation($"Пользователь {user_name} успешно вышел из системы");
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult AccessDenided() => View();
     }
 }

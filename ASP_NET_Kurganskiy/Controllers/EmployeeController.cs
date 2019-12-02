@@ -7,6 +7,7 @@ using ASP_NET_Kurganskiy.ViewModels;
 using ASP_NET_Kurganskiy.Infrastructure.Services;
 using ASP_NET_Kurganskiy.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using ASP_NET_Kurganskiy.Domain.Entities.Identity;
 
 namespace ASP_NET_Kurganskiy.Controllers
 {
@@ -63,7 +64,7 @@ namespace ASP_NET_Kurganskiy.Controllers
 
             return RedirectToAction("Details", new { NewEmployee.Id });
         }
-
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(int? Id)
         {
             if (Id is null) return View(new EmployeeView());
@@ -76,6 +77,7 @@ namespace ASP_NET_Kurganskiy.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(EmployeeView Employee)
         {
             if (Employee is null)
@@ -107,6 +109,8 @@ namespace ASP_NET_Kurganskiy.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int Id)
         {
             var employee = _EmployeesData.GetById(Id);
@@ -115,7 +119,8 @@ namespace ASP_NET_Kurganskiy.Controllers
             return View(employee);
         }
 
-
+        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult DeleteConfirmed(int Id)
         {
             _EmployeesData.Delete(Id);
