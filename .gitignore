@@ -339,3 +339,8 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /ASP_NET_Kurganskiy/wwwroot/lib
+/ASP_NET_Kurganskiy/wwwroot/css/site.min.css
+/ASP_NET_Kurganskiy/wwwroot/css/site.css
+/ASP_NET_Kurganskiy/wwwroot/js/site.min.js.gz
+/ASP_NET_Kurganskiy/wwwroot/js/site.min.js
+/ASP_NET_Kurganskiy/wwwroot/js/site.min.js.map
