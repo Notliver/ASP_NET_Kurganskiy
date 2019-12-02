@@ -19,9 +19,7 @@
                     <h2 class="title text-center">Features Items</h2>
                     @foreach (var product in Model.Products)
                     {
-                        @await Html.PartialAsync("Partial/_FeaturesItem", product)
-
-                        @*<partial name="Partial/_FeaturesItems" model="@product" />*@
+                        <partial name="Partial/_FeaturesItems" model="@product" />
                     }
 
                     <ul class="pagination">
