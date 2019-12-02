@@ -4,14 +4,16 @@ using ASP_NET.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASP_NET.DAL.Migrations
 {
     [DbContext(typeof(ASP_NET_Context))]
-    partial class ASP_NET_ContextModelSnapshot : ModelSnapshot
+    [Migration("20191128213304_bugfixed")]
+    partial class bugfixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
