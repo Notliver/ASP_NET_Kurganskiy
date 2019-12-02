@@ -1,4 +1,6 @@
 ﻿using ASP_NET.DAL.Context;
+using ASP_NET_Kurganskiy.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,15 @@ namespace ASP_NET_Kurganskiy.Data
     public class ASP_NET_KurganskiyContextInitializer
     {
         private readonly ASP_NET_Context _db;
+        private readonly UserManager<User> _UserManager;
+        private readonly RoleManager<Role> _RoleManager;
 
-        public ASP_NET_KurganskiyContextInitializer(ASP_NET_Context db) => _db = db;
+        public ASP_NET_KurganskiyContextInitializer(ASP_NET_Context db, UserManager<User> UserManager, RoleManager<Role> RoleManager)
+        {
+            _db = db;
+            _UserManager = UserManager;
+            _RoleManager = RoleManager;
+        }
 
         public async Task InitializeAsync()
         {
@@ -24,6 +33,8 @@ namespace ASP_NET_Kurganskiy.Data
             //db.EnsureCreatedAsync(); // Создаем базу данных
 
             await db.MigrateAsync(); // Автоматическое создание и миграция базы до последней версии
+
+            await IdentityInitializeAsync();
 
             if (await _db.Products.AnyAsync()) return;
 
@@ -63,5 +74,34 @@ namespace ASP_NET_Kurganskiy.Data
 
             }
         }
+        private async Task IdentityInitializeAsync()
+        {
+            if (!await _RoleManager.RoleExistsAsync(Role.Administrator))
+            {
+                await _RoleManager.CreateAsync(new Role { Name = Role.Administrator });
+            }
+
+            if (!await _RoleManager.RoleExistsAsync(Role.User))
+            {
+                await _RoleManager.CreateAsync(new Role { Name = Role.User });
+            }
+
+            if (await _UserManager.FindByNameAsync(User.Administrator) is null)
+            {
+                var admin = new User
+                {
+                    UserName = User.Administrator,
+                    //Email = "admin@server.com"
+
+                };
+                var creation_result = await _UserManager.CreateAsync(admin, User.AdminPasswordDefault);
+
+                if (creation_result.Succeeded)
+                    await _UserManager.AddToRoleAsync(admin, Role.Administrator);
+                else
+                    throw new InvalidOperationException($"Ошибка при создании администратора в БД {string.Join(",", creation_result.Errors.Select(e => e.Description))}");
+            }
+        }
+
     }
 }

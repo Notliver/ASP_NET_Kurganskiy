@@ -39,6 +39,7 @@ namespace ASP_NET_Kurganskiy.Controllers
 
             if(login_result.Succeeded)
             {
+                
                 _Logger.LogInformation($"Пользователь {Model.UserName} успешно авторизовался");
                 if (Url.IsLocalUrl(Model.ReturnUrl))
                     return Redirect(Model.ReturnUrl);
@@ -68,6 +69,7 @@ namespace ASP_NET_Kurganskiy.Controllers
             var registration_result = await _UserManager.CreateAsync(user, Model.Password);
             if(registration_result.Succeeded)
             {
+                await _UserManager.AddToRoleAsync(user, Role.User);
                 _Logger.LogInformation($"Пользователь {Model.UserName} успешно зарегистрирован");
                 await _SignInManager.SignInAsync(user, false);
                 _Logger.LogInformation($"Пользователь {Model.UserName} зашел в систему");

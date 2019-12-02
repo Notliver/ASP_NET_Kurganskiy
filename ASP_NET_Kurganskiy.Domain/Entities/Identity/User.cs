@@ -7,6 +7,11 @@ namespace ASP_NET_Kurganskiy.Domain.Entities.Identity
 {
     public class User : IdentityUser
     {
+
+        public const string Administrator = "Administrator";
+        public const string AdminPasswordDefault = "AdminPassword";
+
+
         public string Description { get; set; }
 
 
