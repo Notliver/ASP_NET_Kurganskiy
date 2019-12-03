@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace ASP_NET_Kurganskiy.ViewModels.Identity
     {
         [Required]
         [MaxLength(256)]
+        [Remote("IsNameFree", "Account")]
         [Display(Name = "Имя пользователя")]
         public string UserName { get; set; }
 

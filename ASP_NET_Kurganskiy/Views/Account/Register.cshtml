@@ -17,6 +17,7 @@
                     <form asp-controller="Account" asp-action="Register" asp-antiforgery="true">
                         <div asp-validation-summary="ModelOnly" class="text-danger></div>
                         <div class="form-group">
+                            <label asp-for="UserName" class="sr-only"></label>
                             <input asp-for="UserName" placeholder="@nameof(Model.UserName)" />
                             <span asp-validation-for="UserName" class="text-danger"></span>
                         </div>
@@ -35,3 +36,8 @@
         </div>
     </div>
 </section><!--/form-->
+
+@section Scripts
+{
+    <partial name="Partial/_ValidationScriptsPartial"/>
+}

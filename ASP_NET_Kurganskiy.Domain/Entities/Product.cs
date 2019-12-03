@@ -1,7 +1,6 @@
 ﻿using ASP_NET_Kurganskiy.Domain.Entities.Base;
 using ASP_NET_Kurganskiy.Domain.Entities.Base.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -31,12 +30,5 @@ namespace ASP_NET_Kurganskiy.Domain.Entities
 
         //[NotMapped]
         //public int NotMappedProperty { get; set; }
-    }
-
-    public class ProductFilter
-    {
-        public int? SectionId { get; set; }
-
-        public int? BrandId { get; set; }
     }
 }

@@ -11,5 +11,7 @@ namespace ASP_NET_Kurganskiy.Infrastructure.Interfaces
 
         IEnumerable<Product> GetProducts(ProductFilter Filter = null);
 
+        Product GetProductById(int? id);
+
     }
 }
